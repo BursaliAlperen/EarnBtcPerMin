@@ -1,0 +1,171 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="appName">EarnBTCPerMin</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Auth Pages Wrapper -->
+        <div id="auth-container">
+            <!-- Login Page -->
+            <div id="login-page" class="page">
+                <div class="auth-card">
+                    <img src="logo.png" alt="App Logo" class="app-logo">
+                    <h2 data-i18n="loginTitle">Login to your Account</h2>
+                    <form id="login-form">
+                        <div class="input-group">
+                            <label for="login-email" data-i18n="emailLabel">Email</label>
+                            <input type="email" id="login-email" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="login-password" data-i18n="passwordLabel">Password</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" data-i18n="loginButton">Login</button>
+                    </form>
+                    <p class="auth-switch">
+                        <span data-i18n="notRegistered">Not registered yet?</span>
+                        <a href="#" id="show-register" data-i18n="createAccount">Create an account</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Register Page -->
+            <div id="register-page" class="page" style="display: none;">
+                <div class="auth-card">
+                    <img src="logo.png" alt="App Logo" class="app-logo">
+                    <h2 data-i18n="registerTitle">Create a New Account</h2>
+                    <form id="register-form">
+                        <div class="input-group">
+                            <label for="register-username" data-i18n="usernameLabel">Username</label>
+                            <input type="text" id="register-username" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="register-email" data-i18n="emailLabel">Email</label>
+                            <input type="email" id="register-email" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="register-password" data-i18n="passwordLabel">Password</label>
+                            <input type="password" id="register-password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" data-i18n="registerButton">Register</button>
+                    </form>
+                    <p class="auth-switch">
+                        <span data-i18n="alreadyAccount">Already have an account?</span>
+                        <a href="#" id="show-login" data-i18n="loginHere">Login here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main App Page -->
+        <div id="main-app" class="page" style="display: none;">
+            <header>
+                <div class="header-left">
+                    <img src="logo.png" alt="App Logo" class="app-logo-small">
+                    <h1 data-i18n="appName">EarnBTCPerMin</h1>
+                </div>
+                <div class="header-right">
+                    <div class="lang-switcher">
+                        <button id="lang-en" class="btn-lang active">EN</button>
+                        <button id="lang-tr" class="btn-lang">TR</button>
+                    </div>
+                    <button id="logout-btn" class="btn btn-danger">
+                        <i class="fa-solid fa-right-from-bracket"></i> <span data-i18n="logout">Logout</span>
+                    </button>
+                </div>
+            </header>
+
+            <main>
+                <h2 class="welcome-message"><span data-i18n="welcome">Welcome</span>, <span id="username-display"></span>!</h2>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 data-i18n="totalBalance">Total Balance</h3>
+                        <p><i class="fa-brands fa-bitcoin"></i> <span id="total-balance">0.00000000</span> BTC</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 data-i18n="todaysEarnings">Today's Earnings</h3>
+                        <p><i class="fa-brands fa-bitcoin"></i> <span id="today-earnings">0.00000000</span> BTC</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 data-i18n="weeklyEarnings">Weekly Earnings</h3>
+                        <p><i class="fa-brands fa-bitcoin"></i> <span id="weekly-earnings">0.00000000</span> BTC</p>
+                    </div>
+                </div>
+
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3 data-i18n="myWallets">My Wallets</h3>
+                        <div class="table-container">
+                            <table id="wallets-table">
+                                <thead>
+                                    <tr>
+                                        <th data-i18n="address">Address</th>
+                                        <th data-i18n="balance">Balance</th>
+                                        <th data-i18n="actions">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Wallet rows will be inserted here by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <button id="add-wallet-btn" class="btn btn-primary"><i class="fa-solid fa-plus"></i> <span data-i18n="addWallet">Add Wallet</span></button>
+                    </div>
+
+                    <div class="content-card">
+                        <h3 data-i18n="addressDistribution">Address Balance Distribution</h3>
+                        <canvas id="balance-chart"></canvas>
+                    </div>
+                </div>
+                
+                <div id="admin-panel-container" style="display: none;">
+                    <button id="toggle-admin-panel-btn" class="btn btn-secondary">
+                        <i class="fa-solid fa-user-shield"></i> <span data-i18n="manageUsers">Manage Users</span>
+                    </button>
+                    <div id="admin-panel" class="content-card" style="display: none; margin-top: 1rem;">
+                         <h3 data-i18n="adminPanel">Admin Panel</h3>
+                        <div class="table-container">
+                            <table id="users-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th data-i18n="usernameLabel">Username</th>
+                                        <th data-i18n="emailLabel">Email</th>
+                                        <th data-i18n="totalBalance">Total Balance</th>
+                                        <th data-i18n="status">Status</th>
+                                        <th data-i18n="actions">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- User rows will be inserted here by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "app": "./app.js",
+            "storage": "./storage.js",
+            "i18n": "./i18n.js"
+        }
+    }
+    </script>
+    <script type="module" src="app.js"></script>
+</body>
+</html>
